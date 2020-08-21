@@ -111,28 +111,15 @@ void incorporarPaciente(cama * hospital, int total_camas)
         aux -> disponible = 0;
         printf("Nuevo paciente asignado: %s %s Edad: %d Telefono: %s Cama asignada: %d\n",(aux->p) -> nombre, (aux->p) -> apellidos,  (aux->p)-> edad, (aux->p) -> telefono, aux->id);
     }
-    /*
     else{
-      printf("Por ahora se va a sin el realloc");
-        aux = hospital + total_camas + 1;
-        aux -> p = nueva;
-        aux -> disponible = 0;
-
         hospital = (cama *) realloc(hospital, sizeof(cama) * (total_camas + 1));
-        printf("Cuando no hay usuario total camas %d",total_camas);
         aux = hospital + total_camas + 1;
         aux -> p = nueva;
         aux -> disponible = 0;
         ++total_camas;
-        printf("El camas mas mas %d",total_camas);
         aux -> id = total_camas;
         printf("Nuevo paciente asignado: %s %s Edad: %d Telefono: %s Cama asignada: %d\n",nueva -> nombre, nueva -> apellidos,  nueva -> edad, nueva -> telefono, aux->id);
-        /*
-         total_camas += 1;
-         *aux++;
-         aux -> id = total_camas;
-         aux -> disponible = 1;
-         */
+      }
     free(nueva->nombre);
     free(nueva->apellidos);
     free(nueva->telefono);
