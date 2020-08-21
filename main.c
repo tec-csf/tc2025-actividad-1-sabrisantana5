@@ -42,16 +42,27 @@ void camasDisp(cama *hospital,int * total_camas);
 //Main
 int main(int argc, const char * argv[]) {
 
-    //Inicializar menu y camas
+    //Inicializar menu, 3 camas y 1 paciente
     int opc = -1;
     menu * opcs = (menu *) malloc(sizeof(menu)*N);
-    cama * hospital = (cama *) malloc(sizeof(cama)*2);
+    cama * hospital = (cama *) malloc(sizeof(cama)*3);
+    paciente * p1 = (paciente *) malloc(sizeof(paciente));
     int total_camas = 2;
     hospital -> id = 1;
     hospital -> disponible = 1;
     (hospital + 1 )-> id = 2;
     (hospital + 1 )-> disponible = 1;
-
+    (hospital + 2 )-> id = 3;
+    (hospital + 2 )-> disponible = 1;
+    p1->nombre  = (char *) malloc(sizeof(char)*25);
+    p1->apellidos = (char *) malloc(sizeof(char)*40);
+    p1->telefono = (char *) malloc(sizeof(char)*30);
+    p1->nombre = "Juan";
+    p1->apellidos = "Pérez";
+    p1->telefono = "5544667788";
+    p1->edad = 20;
+    hospital -> p = p1;
+    hospital -> disponible = 0;
     //Opciones de menu
     *opcs = incorporarPaciente;
     *(opcs+1) = camaPaciente;
@@ -71,8 +82,7 @@ int main(int argc, const char * argv[]) {
         }
     }
 
-    //Liberar memoria , por el momento da segmentation error
-
+    //Liberar memoria
     cama * aux1 = hospital;
     cama * final = hospital + total_camas;
     for (; aux1 < final; ++aux1) {
@@ -154,9 +164,9 @@ void incorporarPaciente(cama * hospital, int * total_camas)
 
         //Incrementar total de camas
         *total_camas = *total_camas + 5;
-
+        hospital = temp_hospital;
+        temp_hospital = NULL;
       }
-      hospital = temp_hospital;
 }
 
 //Función para
