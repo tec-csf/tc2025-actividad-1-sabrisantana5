@@ -45,24 +45,12 @@ int main(int argc, const char * argv[]) {
     //Inicializar menu, 3 camas y 1 paciente
     int opc = -1;
     menu * opcs = (menu *) malloc(sizeof(menu)*N);
-    cama * hospital = (cama *) malloc(sizeof(cama)*3);
-    paciente * p1 = (paciente *) malloc(sizeof(paciente));
+    cama * hospital = (cama *) malloc(sizeof(cama)*2);
     int total_camas = 2;
     hospital -> id = 1;
     hospital -> disponible = 1;
     (hospital + 1 )-> id = 2;
     (hospital + 1 )-> disponible = 1;
-    (hospital + 2 )-> id = 3;
-    (hospital + 2 )-> disponible = 1;
-    p1->nombre  = (char *) malloc(sizeof(char)*25);
-    p1->apellidos = (char *) malloc(sizeof(char)*40);
-    p1->telefono = (char *) malloc(sizeof(char)*30);
-    p1->nombre = "Juan";
-    p1->apellidos = "Pérez";
-    p1->telefono = "5544667788";
-    p1->edad = 20;
-    hospital -> p = p1;
-    hospital -> disponible = 0;
     //Opciones de menu
     *opcs = incorporarPaciente;
     *(opcs+1) = camaPaciente;
@@ -82,7 +70,6 @@ int main(int argc, const char * argv[]) {
         }
     }
 
-    //Liberar memoria
     cama * aux1 = hospital;
     cama * final = hospital + total_camas;
     for (; aux1 < final; ++aux1) {
@@ -118,16 +105,20 @@ void incorporarPaciente(cama * hospital, int * total_camas)
     nueva->apellidos = (char *) malloc(sizeof(char)*40);
     nueva->telefono = (char *) malloc(sizeof(char)*30);
 
+    char temp;
     //Pedir datos
     printf("Incorporación de paciente, por favor ingrese los siguientes datos:\n");
     printf("Nombre: ");
-    scanf("%s",nueva->nombre );
+    scanf("%c",&temp);
+    scanf("%[^\n]%*c",nueva->nombre);
     printf("Apellidos: ");
-    scanf("%s",nueva->apellidos);
+    scanf("%c",&temp);
+    scanf("%[^\n]%*c",nueva->apellidos);
     printf("Edad: ");
     scanf("%d",&nueva->edad);
     printf("Telefono: ");
-    scanf("%s",nueva->telefono);
+    scanf("%c",&temp);
+    scanf("%[^\n]%*c",nueva->telefono);
 
     //Pasar por cada cama del hospital hasta que encuentra una disponible, cuando la encuentra se sale
     while(aux < final && aux->disponible != 1){
